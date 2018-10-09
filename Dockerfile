@@ -1,15 +1,24 @@
 FROM ruby:2.3-slim
-LABEL maintainer "Ilya Glotov <contact@ilyaglotov.com>"
+LABEL maintainer "defektive <github.com/defektive>"
 
-ENV LANG="C.UTF-8" \
-    DEPS="build-essential \
-          git \
-          libsqlite3-dev"
+ENV LANG C.UTF-8 \
+    DEPS build-essential \
+         git \
+         libsqlite3-dev \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         gnupg2
 
-RUN apt-get update \
+RUN curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && curl -sL https://deb.nodesource.com/setup_6.x | bash -\
+  && apt-get update \
   && apt-get install -y \
     $DEPS \
     sqlite3 \
+    nodejs \
+    yarn \
     \
   && useradd -m beef \
   \
