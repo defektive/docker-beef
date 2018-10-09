@@ -15,7 +15,7 @@ RUN apt-get update \
   \
   && git clone --depth=1 \
     --branch=master \
-    https://github.com/beefproject/beef.git \
+    https://github.com/defektive/beef.git \
     /home/beef/beef \
     \
   && cd /home/beef/beef \
