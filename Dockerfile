@@ -10,15 +10,10 @@ ENV LANG C.UTF-8 \
          curl \
          gnupg2
 
-RUN curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
-  && curl -sL https://deb.nodesource.com/setup_6.x | bash -\
-  && apt-get update \
+RUN apt-get update \
   && apt-get install -y \
     $DEPS \
     sqlite3 \
-    nodejs \
-    yarn \
     \
   && useradd -m beef \
   \
@@ -35,6 +30,12 @@ RUN curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
   && chown -R beef /home/beef/beef \
   \
   && rm -rf /home/beef/beef/.git \
+  && curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -\
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && curl -sL https://deb.nodesource.com/setup_6.x | bash -\
+  && apt-get install -y \
+    nodejs \
+    yarn \
   && apt-get purge -y $DEPS \
   && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/*
