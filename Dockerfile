@@ -36,7 +36,6 @@ RUN apt-get update \
   && apt-get install -y \
     nodejs \
     yarn \
-  && apt-get purge -y $DEPS \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/beef/beef
