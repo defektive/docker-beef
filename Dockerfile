@@ -37,7 +37,6 @@ RUN apt-get update \
     nodejs \
     yarn \
   && apt-get purge -y $DEPS \
-  && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/beef/beef
