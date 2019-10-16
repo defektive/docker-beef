@@ -1,7 +1,9 @@
-FROM ruby:2.3-slim
+FROM ruby:2.4-slim
 LABEL maintainer "defektive <github.com/defektive>"
 
 ENV LANG C.UTF-8 \
+    LANGUAGE en_US.UTF-8 \
+    LC_ALL en_US.UTF-8 \
     DEPS build-essential \
          git \
          libsqlite3-dev \
@@ -12,7 +14,13 @@ ENV LANG C.UTF-8 \
 
 RUN apt-get update \
   && apt-get install -y \
-    $DEPS \
+    build-essential \
+    git \
+    libsqlite3-dev \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
     sqlite3 \
     \
   && useradd -m beef \
